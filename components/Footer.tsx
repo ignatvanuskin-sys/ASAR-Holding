@@ -10,10 +10,14 @@ export default function Footer() {
       <div className="shell">
         <div className="grid gap-12 pb-14 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-5">
-            <Link href="/" aria-label="ASAR HOLDING — на главную">
+            <Link
+              href="/"
+              aria-label="ASAR HOLDING — на главную"
+              className="inline-flex items-center py-3.5"
+            >
               <Wordmark tone="light" />
             </Link>
-            <p className="mt-5 max-w-[26rem] font-serif text-[1.25rem] italic leading-snug text-white/80">
+            <p className="mt-2 max-w-[26rem] font-serif text-[1.25rem] italic leading-snug text-white/80">
               {site.tagline}
             </p>
             <p className="mt-5 max-w-[26rem] text-[0.875rem] leading-relaxed text-white/50">
@@ -22,14 +26,15 @@ export default function Footer() {
             </p>
           </div>
 
+          {/* py-3 даёт высоту нажатия ~45px — комфортно для пальца на телефоне */}
           <nav aria-label="Навигация в подвале" className="md:col-span-3">
             <p className="label text-white/40">Разделы</p>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4">
               {navigation.map((n) => (
                 <li key={n.href}>
                   <Link
                     href={n.href}
-                    className="text-[0.9375rem] text-white/72 transition-colors hover:text-white"
+                    className="inline-block py-3 text-[0.9375rem] text-white/72 transition-colors hover:text-white"
                   >
                     {n.label}
                   </Link>
@@ -40,28 +45,35 @@ export default function Footer() {
 
           <div className="md:col-span-4">
             <p className="label text-white/40">Контакты</p>
-            <ul className="mt-5 space-y-3 text-[0.9375rem]">
+            <ul className="mt-4 text-[0.9375rem]">
               <li>
-                <a href={contact.phone.href} className="block text-white/85 transition-colors hover:text-white">
-                  {contact.phone.display}
+                <a
+                  href={contact.phone.href}
+                  className="block py-2.5 text-white/85 transition-colors hover:text-white"
+                >
+                  <span className="block">{contact.phone.display}</span>
+                  <span className="mt-0.5 block text-[0.8125rem] text-white/40">
+                    {contact.phone.label}
+                  </span>
                 </a>
-                <span className="text-[0.8125rem] text-white/40">{contact.phone.label}</span>
               </li>
               <li>
                 <a
                   href={contact.phoneMaterials.href}
-                  className="block text-white/85 transition-colors hover:text-white"
+                  className="block py-2.5 text-white/85 transition-colors hover:text-white"
                 >
-                  {contact.phoneMaterials.display}
+                  <span className="block">{contact.phoneMaterials.display}</span>
+                  <span className="mt-0.5 block text-[0.8125rem] text-white/40">
+                    {contact.phoneMaterials.label}
+                  </span>
                 </a>
-                <span className="text-[0.8125rem] text-white/40">{contact.phoneMaterials.label}</span>
               </li>
               <li>
                 <a
                   href={contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/85 transition-colors hover:text-white"
+                  className="block py-3 text-white/85 transition-colors hover:text-white"
                 >
                   WhatsApp
                 </a>
@@ -71,7 +83,7 @@ export default function Footer() {
                   href={contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/85 transition-colors hover:text-white"
+                  className="block py-3 text-white/85 transition-colors hover:text-white"
                 >
                   Instagram {contact.instagramHandle}
                 </a>
@@ -81,13 +93,13 @@ export default function Footer() {
                   href={contact.twoGisMain}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/85 transition-colors hover:text-white"
+                  className="block py-3 text-white/85 transition-colors hover:text-white"
                 >
                   2ГИС — карточка компании
                 </a>
               </li>
             </ul>
-            <address className="mt-6 not-italic text-[0.8125rem] leading-relaxed text-white/45">
+            <address className="mt-5 not-italic text-[0.8125rem] leading-relaxed text-white/45">
               {contact.officeFull}
               <br />
               {contact.hoursNote}

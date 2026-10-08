@@ -62,7 +62,7 @@ export default function Header() {
           <Link
             href="/"
             aria-label="ASAR HOLDING — на главную"
-            className="shrink-0 py-2"
+            className="inline-flex shrink-0 items-center py-3.5"
             onClick={close}
           >
             <Wordmark tone={solid ? 'dark' : 'light'} />
@@ -181,54 +181,61 @@ export default function Header() {
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className="fixed inset-0 z-40 bg-ink lg:hidden"
           >
-            <div className="flex h-full flex-col overflow-y-auto pt-[76px] pb-10">
-              <nav aria-label="Меню" className="shell flex flex-col">
-                {navigation.map((item, i) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 + i * 0.045, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={close}
-                      className="block border-b border-white/10 py-4 text-[1.5rem] font-semibold tracking-[-0.02em] text-white"
+            <div className="flex h-full flex-col">
+              {/* Зона под шапкой не участвует в прокрутке, поэтому пункты меню
+                  уходят под неё, а не наползают на логотип и кнопку закрытия.
+                  Высота совпадает с высотой шапки в открытом состоянии. */}
+              <div className="h-[68px] shrink-0 md:h-[92px]" aria-hidden="true" />
+
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain pb-10">
+                <nav aria-label="Меню" className="shell flex flex-col">
+                  {navigation.map((item, i) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.05 + i * 0.045, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
+                      <Link
+                        href={item.href}
+                        onClick={close}
+                        className="block border-b border-white/10 py-4 text-[1.5rem] font-semibold tracking-[-0.02em] text-white"
+                      >
+                        {item.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
 
-              <div className="shell mt-8 flex flex-col gap-3">
-                <a href={contact.phone.href} className="btn btn-light w-full !min-h-[3.25rem]">
-                  {contact.phone.display}
-                </a>
-                <a
-                  href={contact.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost-light w-full !min-h-[3.25rem]"
-                >
-                  WhatsApp
-                </a>
-                <a
-                  href={contact.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost-light w-full !min-h-[3.25rem]"
-                >
-                  Instagram {contact.instagramHandle}
-                </a>
-              </div>
+                <div className="shell mt-8 flex flex-col gap-3">
+                  <a href={contact.phone.href} className="btn btn-light w-full !min-h-[3.25rem]">
+                    {contact.phone.display}
+                  </a>
+                  <a
+                    href={contact.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost-light w-full !min-h-[3.25rem]"
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    href={contact.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost-light w-full !min-h-[3.25rem]"
+                  >
+                    Instagram {contact.instagramHandle}
+                  </a>
+                </div>
 
-              <div className="shell mt-auto pt-10">
-                <p className="text-sm leading-relaxed text-white/55">
-                  {contact.officeFull}
-                  <br />
-                  {contact.hoursNote}
-                </p>
+                <div className="shell mt-auto pt-10">
+                  <p className="text-sm leading-relaxed text-white/55">
+                    {contact.officeFull}
+                    <br />
+                    {contact.hoursNote}
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

@@ -1,4 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Страница не найдена',
+  description:
+    'Такой страницы на сайте ASAR HOLDING нет. Посмотрите объекты компании в Кокшетау или перейдите к контактам.',
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

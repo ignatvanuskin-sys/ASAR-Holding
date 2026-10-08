@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState, type FormEvent } from 'react';
+import { useId, useRef, useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { contact } from '@/lib/site';
 
@@ -14,6 +14,8 @@ type Errors = Partial<Record<'name' | 'phone', string>>;
  */
 export default function LeadForm() {
   const uid = useId();
+  /** Блокировка на время запроса: страхует от двух отправок при синхронном двойном клике. */
+  const inFlight = useRef(false);
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Errors>({});
   const [values, setValues] = useState({ name: '', phone: '', comment: '' });
@@ -32,6 +34,8 @@ export default function LeadForm() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (inFlight.current) return;
+
     const found = validate();
     setErrors(found);
     if (Object.keys(found).length > 0) {
@@ -39,6 +43,7 @@ export default function LeadForm() {
       return;
     }
 
+    inFlight.current = true;
     setStatus('submitting');
     try {
       const res = await fetch('/api/lead', {
@@ -51,6 +56,8 @@ export default function LeadForm() {
       setValues({ name: '', phone: '', comment: '' });
     } catch {
       setStatus('error');
+    } finally {
+      inFlight.current = false;
     }
   }
 

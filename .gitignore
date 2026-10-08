@@ -12,9 +12,7 @@ next-env.d.ts
 tsconfig.tsbuildinfo
 
 # Результаты браузерных аудитов (рабочие артефакты, не часть проекта)
-audit/
-audit2/
-audit3/
+audit*/
 
 # Скриншоты исследования Instagram (служебные)
 asar_ig_*.png

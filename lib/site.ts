@@ -13,6 +13,20 @@
  *  - Instagram @asar_holding — публикации и подписи
  */
 
+/**
+ * Публичный адрес сайта. Подставляется в metadataBase, canonical, Open Graph,
+ * sitemap.xml и robots.txt.
+ *
+ * По умолчанию — рабочий адрес продакшена на Vercel. Когда к проекту будет
+ * подключён собственный домен, задайте переменную окружения
+ * NEXT_PUBLIC_SITE_URL=https://ваш-домен в настройках хостинга.
+ * Иначе canonical и sitemap будут указывать на несуществующий домен,
+ * и поисковые системы не смогут корректно проиндексировать сайт.
+ */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://asar-holding.vercel.app'
+).replace(/\/+$/, '');
+
 export const site = {
   name: 'ASAR HOLDING',
   wordmark: 'ASAR',
@@ -24,7 +38,7 @@ export const site = {
   /** Слоган компании — её собственные слова из официального профиля. */
   tagline: 'Строим не стены — строим доверие',
   subTagline: 'Доверие — наш фундамент',
-  url: 'https://asar-holding.kz',
+  url: siteUrl,
 } as const;
 
 export const contact = {
