@@ -1,0 +1,20 @@
+node_modules/
+.next/
+out/
+build/
+.DS_Store
+*.pem
+npm-debug.log*
+.env*
+!.env.example
+_assets/
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Результаты браузерных аудитов (рабочие артефакты, не часть проекта)
+audit/
+audit2/
+audit3/
+
+# Скриншоты исследования Instagram (служебные)
+asar_ig_*.png
